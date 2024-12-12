@@ -71,7 +71,7 @@ public class BiMessageConsumer {
         Chart findChart = chartService.getById(chartId);
         ThrowUtils.throwIf(findChart == null, ErrorCode.NOT_FOUND_ERROR, "当前指定chartId关联图表信息不存在");
 
-        String result = aiManager.doChat(CommonConstant.BI_MODEL_ID, buildUserInput(findChart));
+        String result = aiManager.sendMsgToXingHuo(true, buildUserInput(findChart));
         // 此处分隔符以设定为参考
         String[] splits = result.split("【【【【【"); // 【【【【【
         if (splits.length < 3) {

@@ -95,8 +95,8 @@ wx:
 # todo 需替换配置
 cos:
   client:
-    accessKey: xxx
-    secretKey: xxx
+    accessKey: 4tf2jncghd98a8f00vz684khzenangdx
+    secretKey: 4r46pwleiwx4e8dagsq23o3ynfyaynpj
     region: xxx
     bucket: xxx
 # 接口文档配置
@@ -116,4 +116,10 @@ yuapi:
   client:
     access-key:
     secret-key:
+## 讯飞 AI 配置
+xun-fei:
+  client:
+    appId: ee396075
+    apiSecret: ZmI1YjdmYWZiYjc2MWExZjY3MDRiNTdh
+    apiKey: da42c3174872d5ac2b7fa448fa8b91b5
 

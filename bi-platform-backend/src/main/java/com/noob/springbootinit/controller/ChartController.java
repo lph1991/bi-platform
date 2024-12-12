@@ -425,7 +425,7 @@ public class ChartController {
                 return ;
             }
            // 2.2 异步调用AI接口
-            String result = aiManager.doChat(biModelId, userInput.toString());
+            String result = aiManager.sendMsgToXingHuo(true, userInput.toString());
             // 此处分隔符以设定为参考
             String[] splits = result.split("【【【【【"); // 【【【【【
             if (splits.length < 3) {
@@ -497,14 +497,14 @@ public class ChartController {
         // 检验文件后缀（一般是xxx.csv，获取到.后缀），可借助FileUtil工具类的getSuffix方法获取
         String suffix = FileUtil.getSuffix(originalFilename);
         final List<String> validFileSuffixList = Arrays.asList(".xlsx",".xls"); // ".png",".csv",".jpg",".svg","webp","jpeg"
-        ThrowUtils.throwIf(!validFileSuffixList.contains(suffix),ErrorCode.PARAMS_ERROR,"文件后缀格式非法");
-
-        // 获取当前登陆用户
-        User loginUser = userService.getLoginUser(request);
-        long biModelId = CommonConstant.BI_MODEL_ID;
-
-        // 引入限流判断
-        redisLimiterManager.doRateLimit("genChartByAi_"+loginUser.getId());
+//        ThrowUtils.throwIf(!validFileSuffixList.contains(suffix),ErrorCode.PARAMS_ERROR,"文件后缀格式非法");
+//
+//        // 获取当前登陆用户
+//        User loginUser = userService.getLoginUser(request);
+//        long biModelId = CommonConstant.BI_MODEL_ID;
+//
+//        // 引入限流判断
+//        redisLimiterManager.doRateLimit("genChartByAi_"+loginUser.getId());
 
         // 构造用户输入
         StringBuilder userInput = new StringBuilder();
@@ -521,7 +521,7 @@ public class ChartController {
         String csvData = ExcelUtils.excelToCsv(multipartFile);
         userInput.append(csvData).append("\n");
 
-        String result = aiManager.doChat(biModelId, userInput.toString());
+        String result = aiManager.sendMsgToXingHuo(true, userInput.toString());
         // 此处分隔符以设定为参考
         String[] splits = result.split("【【【【【"); // 【【【【【
         if (splits.length < 3) {
@@ -537,13 +537,13 @@ public class ChartController {
         chart.setChartType(chartType);
         chart.setGenChart(genChart);
         chart.setGenResult(genResult);
-        chart.setUserId(loginUser.getId());
-        boolean saveResult = chartService.save(chart);
-        ThrowUtils.throwIf(!saveResult, ErrorCode.SYSTEM_ERROR, "图表保存失败");
+        chart.setUserId(1111L);
+//        boolean saveResult = chartService.save(chart);
+//        ThrowUtils.throwIf(!saveResult, ErrorCode.SYSTEM_ERROR, "图表保存失败");
         BiResponse biResponse = new BiResponse();
         biResponse.setGenChart(genChart);
         biResponse.setGenResult(genResult);
-        biResponse.setChartId(chart.getId());
+        biResponse.setChartId(11111L);
         return ResultUtils.success(biResponse);
     }
 

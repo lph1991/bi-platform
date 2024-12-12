@@ -32,7 +32,7 @@ const AddChart: React.FC = () => {
 
   /**
    * 提交
-   * @param values 
+   * @param values
    */
   const onFinish = async (values: any) => {
     console.log('Received values of form: ', values);
@@ -48,7 +48,7 @@ const AddChart: React.FC = () => {
     // 如果提交了，则将图表数据和图表代码清空（避免和之前提交的图表堆叠）；如果option清空了则组件会触发重新渲染，不会保留之前的历史记录
     setChart(undefined);
     setOption(undefined);
-  
+
     // 对接后端，上传数据
     const params = {
       ...values,
@@ -63,12 +63,14 @@ const AddChart: React.FC = () => {
       } else {
         message.success('分析成功');
         // 解析成对象，为空则设置为空字符串
-        const chartOption = JSON.parse(res.data.genChart??'');
+        console.log(11,res.data.genChart)
+        const chartOption = JSON.parse(res.data.genChart.replace(/^'|'$/g, '')??'');
         // 如果为空，则抛出异常，提示图表代码解析错误
         if(!chartOption){
           throw new Error('图表代码解析错误');
         }else{
           // 解析成功，则将响应结果设置到图表中进行渲染
+          console.log(22,res.data.genChart)
           setChart(res.data);
           setOption(chartOption);
         }
@@ -167,7 +169,7 @@ const AddChart: React.FC = () => {
           </Card>
         </Col>
       </Row>
-      
+
     </div>
   );
 };

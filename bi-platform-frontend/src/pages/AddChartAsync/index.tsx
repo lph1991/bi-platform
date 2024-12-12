@@ -27,7 +27,7 @@ const AddChartAsync: React.FC = () => {
 
   /**
    * 提交
-   * @param values 
+   * @param values
    */
   const onFinish = async (values: any) => {
     console.log('Received values of form: ', values);
@@ -58,7 +58,7 @@ const AddChartAsync: React.FC = () => {
       }
     } catch (e: any) {
       // 异常情况下，提示分析失败和具体的原因说明
-      message.error('分析失败，' + e.message);
+      message.error('分析失败1，' + e.message);
     }
 
     // 提交结束，将setSubmitting设置为false
